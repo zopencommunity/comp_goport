@@ -1,0 +1,34 @@
+export ZOPEN_TYPE="BARE"
+
+export ZOPEN_NAME="ibm_go"
+export ZOPEN_CONFIGURE=skip
+export ZOPEN_CHECK=skip
+export ZOPEN_MAKE=skip
+export ZOPEN_INSTALL=zopen_install
+
+zopen_append_to_env()
+{
+cat <<zz
+  if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
+    # Find the path to go
+    GO_PATH=\$(PATH="\$ZOPEN_OLD_PATH" type go | cut -f3 -d' ')
+  else
+    GO_PATH=\$(type go | cut -f3 -d' ')
+  fi
+
+  # If Go is not found, exit with an error message
+  if [ -z "\${GO_PATH}" ]; then
+      echo "Go not found"
+      return 1
+  fi
+
+  if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
+    # Set the PATH environment variable to the directory of the Go path
+    export PATH="\$(dirname "\${GO_PATH}"):\${PATH}"
+  fi
+zz
+}
+
+zopen_install() {
+  mkdir -p $ZOPEN_INSTALL_DIR
+}
