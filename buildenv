@@ -11,15 +11,20 @@ zopen_append_to_env()
 cat <<zz
   if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
     # Find the path to go
-    GO_PATH=\$(PATH="\$ZOPEN_OLD_PATH" type go | cut -f3 -d' ')
+    GO_PATH=\$(PATH="\$ZOPEN_OLD_PATH" /bin/type go | cut -f3 -d' ')
   else
-    GO_PATH=\$(type go | cut -f3 -d' ')
+    GO_PATH=\$(/bin/type go | cut -f3 -d' ')
   fi
 
   # If Go is not found, exit with an error message
   if [ -z "\${GO_PATH}" ]; then
       echo "Go not found"
       return 1
+  fi
+
+  if ! \${GO_PATH} version 2>&1 | grep -q "zos/s390x"; then
+    echo "The go executable is not a zos s390 go compiler"
+    return 1;
   fi
 
   if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
