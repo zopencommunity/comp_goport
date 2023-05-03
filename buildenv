@@ -1,6 +1,8 @@
+# Currently just checks for the presence of Go on the system, used to simplify zopen build 
+# In the future, this will be used to build Go from source
 export ZOPEN_TYPE="BARE"
 
-export ZOPEN_NAME="ibm_go"
+export ZOPEN_NAME="comp_go"
 export ZOPEN_CONFIGURE=skip
 export ZOPEN_CHECK=skip
 export ZOPEN_MAKE=skip
@@ -18,12 +20,12 @@ cat <<zz
 
   # If Go is not found, exit with an error message
   if [ -z "\${GO_PATH}" ]; then
-      echo "Go not found"
+      echo "Go not found. Please install from https://www.ibm.com/products/open-enterprise-sdk-go-zos."
       return 1
   fi
 
   if ! \${GO_PATH} version 2>&1 | grep -q "zos/s390x"; then
-    echo "The go executable is not a zos s390 go compiler"
+    echo "The go executable is not a zos s390 go compiler. Please install https://www.ibm.com/products/open-enterprise-sdk-go-zos."
     return 1;
   fi
 
