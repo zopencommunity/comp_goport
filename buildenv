@@ -29,7 +29,7 @@ cat <<zz
     # Find the path to go
     GO_PATH=\$(PATH="\$ZOPEN_OLD_PATH" /bin/type go | cut -f3 -d' ')
   else
-    GO_PATH=\$(/bin/type go | cut -f3 -d' ')
+    return 0 # This should do nothing if not in zopen build
   fi
 
   # If Go is not found, exit with an error message
