@@ -53,3 +53,8 @@ zz
 zopen_install() {
   mkdir -p $ZOPEN_INSTALL_DIR
 }
+
+zopen_get_version()
+{
+  echo "1.0.0"
+}
