@@ -48,7 +48,8 @@ cat <<zz
     export PATH="\$(dirname "\${GO_PATH}"):\${PATH}"
 
     # Set the GOPATH to the zopen working dir so as not to fill up $HOME/go
-    export GOPATH="$PWD/go"
+    export GOPATH="\$ZOPEN_ROOT/go"
+    mkdir -p \$GOPATH
   fi
 zz
 }
