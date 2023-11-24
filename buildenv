@@ -34,12 +34,12 @@ cat <<zz
 
   # If Go is not found, exit with an error message
   if [ -z "\${GO_PATH}" ]; then
-      echo "Go not found. Please install from https://www.ibm.com/products/open-enterprise-sdk-go-zos."
+      echo "Go not found. Please install from https://www.ibm.com/products/open-enterprise-sdk-go-zos." >&2
       return 1
   fi
 
   if ! \${GO_PATH} version 2>&1 | grep -q "zos/s390x"; then
-    echo "The go executable is not a zos s390 go compiler. Please install https://www.ibm.com/products/open-enterprise-sdk-go-zos."
+    echo "The go executable is not a zos s390 go compiler. Please install https://www.ibm.com/products/open-enterprise-sdk-go-zos." >&2
     return 1;
   fi
 
