@@ -47,9 +47,13 @@ cat <<zz
     # Set the PATH environment variable to the directory of the Go path
     export PATH="\$(dirname "\${GO_PATH}"):\${PATH}"
 
-    # Set the GOPATH to the zopen working dir so as not to fill up $HOME/go
+    # Set the go environment vars to the zopen working dir so as not to fill up $HOME
     export GOPATH="\$ZOPEN_ROOT/go"
+    export GOCACHE="\$ZOPEN_ROOT/gocache"
+    export GOTMPDIR="\$ZOPEN_ROOT/gotmp"
     mkdir -p \$GOPATH
+    mkdir -p \$GOCACHE
+    mkdir -p \$GOTMPDIR
   fi
 zz
 }
