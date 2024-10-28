@@ -2,6 +2,7 @@
 # In the future, this will be used to build Go from source
 export ZOPEN_TYPE="BARE"
 
+export ZOPEN_CATEGORIES="development"
 export ZOPEN_NAME="comp_go"
 export ZOPEN_CONFIGURE=skip
 export ZOPEN_CHECK=zopen_check
